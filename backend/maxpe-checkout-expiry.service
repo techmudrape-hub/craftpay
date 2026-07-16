@@ -1,0 +1,17 @@
+[Unit]
+Description=MaxPe Checkout Expiry Service
+After=network.target mysql.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/var/www/orchpay/orchpay/backend
+Environment="PATH=/var/www/orchpay/orchpay/venv/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/var/www/orchpay/orchpay/venv/bin/python3 maxpe_checkout_expiry_service.py
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/maxpe-checkout-expiry.log
+StandardError=append:/var/log/maxpe-checkout-expiry-error.log
+
+[Install]
+WantedBy=multi-user.target

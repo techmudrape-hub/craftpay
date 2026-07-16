@@ -1,0 +1,17 @@
+[Unit]
+Description=OrchPay Auto-Settlement Scheduler
+After=network.target orchpay-api.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/var/www/orchpay/orchpay/backend
+Environment="PATH=/var/www/orchpay/orchpay/backend/venv/bin"
+ExecStart=/var/www/orchpay/orchpay/backend/venv/bin/python3 /var/www/orchpay/orchpay/backend/auto_settlement_scheduler.py
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/orchpay_auto_settlement.log
+StandardError=append:/var/log/orchpay_auto_settlement_error.log
+
+[Install]
+WantedBy=multi-user.target

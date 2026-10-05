@@ -6,7 +6,7 @@ import {
   ChevronDown, LogOut, Bell, Search,
   FileText, Clock, DollarSign, Building,
   Lock, Key, Book, KeyRound, QrCode, CreditCard, User,
-  ChevronLeft, ChevronRight, AlertTriangle
+  ChevronLeft, ChevronRight, AlertTriangle, Banknote, List
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -21,67 +21,52 @@ const menuItems = [
     icon: LayoutDashboard, 
     path: '/' 
   },
-  {
-    title: 'Transactions',
-    icon: ArrowLeftRight,
-    submenu: [
-      { title: 'Payin Report', icon: FileText, path: '/transactions/payin-report' },
-      { title: 'Payout Report', icon: FileText, path: '/transactions/payout-report' },
-    ]
+  { 
+    title: 'Collections', 
+    icon: FileText, 
+    path: '/transactions/payin-report' 
   },
-  {
-    title: 'Wallet',
-    icon: Wallet,
-    submenu: [
-      { title: 'Wallet Overview', icon: Wallet, path: '/wallet/overview' },
-      { title: 'Wallet Statement', icon: FileText, path: '/wallet/statement' },
-    ]
+  { 
+    title: 'Payouts', 
+    icon: ArrowLeftRight, 
+    path: '/transactions/payout-report' 
+  },
+  { 
+    title: 'Chargebacks', 
+    icon: AlertTriangle, 
+    path: '/chargebacks' 
   },
   {
     title: 'Fund Manager',
     icon: TrendingUp,
     submenu: [
-      { title: 'Fund Request', icon: FileText, path: '/fund-manager/request' },
-      { title: 'Settle Fund', icon: DollarSign, path: '/fund-manager/settle' },
+      { title: 'Wallet Overview', icon: Wallet, path: '/fund-manager/wallet-overview' },
+      { title: 'Wallet Statement', icon: FileText, path: '/fund-manager/wallet-statement' },
+      { title: 'Fund Request', icon: DollarSign, path: '/fund-manager/request' },
+      { title: 'IMPS Payout', icon: Banknote, path: '/fund-manager/settle' },
+      { title: 'Bank Lists', icon: List, path: '/fund-manager/bank-lists' },
     ]
   },
+  { 
+    title: 'Collect Payment', 
+    icon: QrCode, 
+    path: '/collect-payment' 
+  },
   {
-    title: 'Security',
-    icon: Shield,
+    title: 'Settings',
+    icon: Settings,
     submenu: [
-      { title: 'Change Password', icon: Lock, path: '/security/change-password' },
-      { title: 'Change PIN', icon: Key, path: '/security/change-pin' },
+      { title: 'Reset Password', icon: Lock, path: '/settings/reset-password' },
+      { title: 'Rates', icon: CreditCard, path: '/settings/rates' },
     ]
   },
   {
     title: 'Developer Zone',
     icon: Book,
     submenu: [
-      { title: 'Documentation', icon: FileText, path: '/developer/documentation' },
-      { title: 'Credentials', icon: KeyRound, path: '/developer/credentials' },
+      { title: 'API Docs', icon: FileText, path: '/developer/api-docs' },
+      { title: 'API Keys', icon: KeyRound, path: '/developer/api-keys' },
     ]
-  },
-  {
-    title: 'Settings',
-    icon: Settings,
-    submenu: [
-      { title: 'Add/Update Bank', icon: Building, path: '/settings/bank' },
-    ]
-  },
-  { 
-    title: 'Generate QR', 
-    icon: QrCode, 
-    path: '/generate-qr' 
-  },
-  { 
-    title: 'My Commercials', 
-    icon: CreditCard, 
-    path: '/my-commercials' 
-  },
-  { 
-    title: 'Chargebacks', 
-    icon: AlertTriangle, 
-    path: '/chargebacks' 
   },
 ]
 
@@ -231,7 +216,7 @@ export default function DashboardLayout() {
                           to={subItem.path}
                           className={`flex items-center gap-3 p-2.5 rounded-lg transition-all duration-200 group ${
                             isActive(subItem.path) 
-                              ? 'orchpay-gradient-btn text-white shadow-lg shadow-purple-500/30 scale-[1.02]' 
+                              ? 'craftpay-gradient-btn text-white shadow-lg shadow-purple-500/30 scale-[1.02]' 
                               : 'text-gray-600 hover:bg-purple-50/70 hover:text-purple-700'
                           }`}
                         >
@@ -247,7 +232,7 @@ export default function DashboardLayout() {
                   to={item.path}
                   className={`flex items-center gap-3 p-3 rounded-xl transition-all duration-200 group ${
                     isActive(item.path) 
-                      ? 'orchpay-gradient-btn text-white shadow-lg shadow-purple-500/30 scale-[1.02]' 
+                      ? 'craftpay-gradient-btn text-white shadow-lg shadow-purple-500/30 scale-[1.02]' 
                       : 'text-gray-700 hover:bg-purple-50/70 hover:text-purple-700'
                   } ${!sidebarOpen && 'justify-center'}`}
                   title={!sidebarOpen ? item.title : ''}
@@ -301,7 +286,7 @@ export default function DashboardLayout() {
                   <p className="text-sm font-semibold text-gray-800">{merchantInfo.name}</p>
                   <p className="text-xs text-gray-500">{merchantInfo.email}</p>
                 </div>
-                <div className="w-11 h-11 orchpay-gradient-btn rounded-xl flex items-center justify-center text-white font-semibold shadow-lg shadow-purple-500/30">
+                <div className="w-11 h-11 craftpay-gradient-btn rounded-xl flex items-center justify-center text-white font-semibold shadow-lg shadow-purple-500/30">
                   <User size={20} />
                 </div>
               </div>

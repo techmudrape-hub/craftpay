@@ -5,35 +5,37 @@ import { useLocation } from 'react-router-dom';
 const routeTitles = {
   '/': 'Dashboard',
   '/login': 'Login',
-  
-  // Transactions
-  '/transactions/payin-report': 'PayIN Report',
-  '/transactions/payout-report': 'PayOUT Report',
-  
-  // Wallet
-  '/wallet/overview': 'Wallet Overview',
-  '/wallet/statement': 'Wallet Statement',
-  
+
+  // Collections (Payin)
+  '/transactions/payin-report': 'Collections',
+
+  // Payouts
+  '/transactions/payout-report': 'Payouts',
+
+  // Chargebacks
+  '/chargebacks': 'Chargebacks',
+  '/chargeback-deductions': 'Chargeback Deductions',
+
   // Fund Manager
-  '/fund-manager/settle': 'Settle Fund',
+  '/fund-manager/wallet-overview': 'Wallet Overview',
+  '/fund-manager/wallet-statement': 'Wallet Statement',
   '/fund-manager/request': 'Fund Request',
-  
-  // Security
-  '/security/change-password': 'Change Password',
-  '/security/change-pin': 'Change PIN',
-  
-  // Developer Zone
-  '/developer/documentation': 'API Documentation',
-  '/developer/credentials': 'API Credentials',
-  
+  '/fund-manager/settle': 'IMPS Payout',
+  '/fund-manager/bank-lists': 'Bank Lists',
+
+  // Collect Payment
+  '/collect-payment': 'Collect Payment',
+
   // Settings
-  '/settings/bank': 'Bank Management',
-  
-  // Generate QR
-  '/generate-qr': 'Generate QR Code',
-  
-  // My Commercials
-  '/my-commercials': 'My Commercials',
+  '/settings/reset-password': 'Reset Password',
+  '/settings/rates': 'Rates',
+
+  // Developer Zone
+  '/developer/api-docs': 'API Docs',
+  '/developer/api-keys': 'API Keys',
+
+  // QR Transactions
+  '/qr-transactions': 'QR Transactions',
 };
 
 export const usePageTitle = (customTitle = null) => {

@@ -756,18 +756,22 @@ SET FOREIGN_KEY_CHECKS=1;
 """
 
 def setup_database():
-    print(f"Connecting to MySQL database '{DB_NAME}' at '{DB_HOST}'...")
+    print(f"Connecting to MySQL server at '{DB_HOST}'...")
     try:
+        # First connect without specifying a database, so we can create it if it doesn't exist
         connection = pymysql.connect(
             host=DB_HOST,
             user=DB_USER,
             password=DB_PASSWORD,
-            database=DB_NAME,
             charset='utf8mb4',
             cursorclass=pymysql.cursors.DictCursor
         )
         
         with connection.cursor() as cursor:
+            print(f"Creating database '{DB_NAME}' if it doesn't exist...")
+            cursor.execute(f"CREATE DATABASE IF NOT EXISTS `{DB_NAME}`")
+            cursor.execute(f"USE `{DB_NAME}`")
+            
             print("Executing schema...")
             # Split schema by semicolon, but handle cases where semicolon is inside comments or strings
             # Since this is a simple export, we can execute it by executing statements one by one.

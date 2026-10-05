@@ -6,24 +6,13 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Building, Eye, EyeOff, RefreshCw, Trash2, ToggleLeft, ToggleRight } from 'lucide-react'
+import { List, Eye, EyeOff, RefreshCw, Trash2, ToggleLeft, ToggleRight } from 'lucide-react'
 import { toast } from 'sonner'
 import clientAPI from '@/api/client_api'
 
 export default function BankManagement() {
-  const [loading, setLoading] = useState(false)
   const [loadingBanks, setLoadingBanks] = useState(true)
   const [banks, setBanks] = useState([])
-  
-  // Form states
-  const [bankName, setBankName] = useState('')
-  const [accountNo, setAccountNo] = useState('')
-  const [reAccountNo, setReAccountNo] = useState('')
-  const [ifscCode, setIfscCode] = useState('')
-  const [branchName, setBranchName] = useState('')
-  const [accountHolderName, setAccountHolderName] = useState('')
-  const [tpin, setTpin] = useState('')
-  const [showTpin, setShowTpin] = useState(false)
   
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const [deletingBank, setDeletingBank] = useState(null)
@@ -49,84 +38,6 @@ export default function BankManagement() {
     }
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    
-    // Check bank limit
-    if (banks.length >= 5) {
-      toast.error('Maximum 5 banks allowed')
-      return
-    }
-    
-    if (!bankName) {
-      toast.error('Please select a bank name')
-      return
-    }
-    
-    if (!accountNo) {
-      toast.error('Please enter account number')
-      return
-    }
-    
-    if (accountNo !== reAccountNo) {
-      toast.error('Account numbers do not match')
-      return
-    }
-    
-    if (!ifscCode) {
-      toast.error('Please enter IFSC code')
-      return
-    }
-    
-    if (!branchName) {
-      toast.error('Please enter branch name')
-      return
-    }
-    
-    if (!accountHolderName) {
-      toast.error('Please enter account holder name')
-      return
-    }
-    
-    if (!tpin || tpin.length !== 6) {
-      toast.error('Please enter valid 6-digit TPIN')
-      return
-    }
-    
-    setLoading(true)
-    try {
-      const response = await clientAPI.addBank({
-        bankName,
-        accountNumber: accountNo,
-        reAccountNumber: reAccountNo,
-        ifscCode,
-        branchName,
-        accountHolderName,
-        tpin
-      })
-      
-      if (response.success) {
-        toast.success('Bank account added successfully!')
-        handleReset()
-        loadBanks()
-      }
-    } catch (error) {
-      toast.error(error.message || 'Failed to add bank account')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleReset = () => {
-    setBankName('')
-    setAccountNo('')
-    setReAccountNo('')
-    setIfscCode('')
-    setBranchName('')
-    setAccountHolderName('')
-    setTpin('')
-  }
-
   const handleDeleteClick = (bank) => {
     setDeletingBank(bank)
     setDeleteTpin('')
@@ -138,7 +49,6 @@ export default function BankManagement() {
       toast.error('Please enter valid 6-digit TPIN')
       return
     }
-    
     try {
       const response = await clientAPI.deleteBank(deletingBank.id, deleteTpin)
       if (response.success) {
@@ -170,21 +80,6 @@ export default function BankManagement() {
       <Badge className="bg-green-100 text-green-700 hover:bg-green-100">Active</Badge>
     ) : (
       <Badge className="bg-gray-100 text-gray-700 hover:bg-gray-100">Inactive</Badge>
-    )
-  }
-
-  const getSettlementStatusBadge = (status) => {
-    const statusConfig = {
-      'PENDING': { bg: 'bg-yellow-100', text: 'text-yellow-700' },
-      'APPROVED': { bg: 'bg-green-100', text: 'text-green-700' },
-      'REJECTED': { bg: 'bg-red-100', text: 'text-red-700' }
-    }
-    
-    const config = statusConfig[status] || statusConfig['PENDING']
-    return (
-      <Badge className={`${config.bg} ${config.text} hover:${config.bg}`}>
-        {status}
-      </Badge>
     )
   }
 
@@ -231,160 +126,28 @@ export default function BankManagement() {
       </Dialog>
 
       <div className="space-y-6">
+        {/* Page Header */}
         <div className="flex items-center gap-3">
-          <Building className="h-8 w-8 text-orange-600" />
-          <h1 className="text-3xl font-bold">Add Bank</h1>
+          <div className="p-2.5 rounded-xl bg-gradient-to-br from-purple-100 to-indigo-100">
+            <List className="h-7 w-7 text-purple-600" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Bank Lists</h1>
+            <p className="text-sm text-gray-500">View and manage your registered bank accounts</p>
+          </div>
         </div>
 
-        {/* Add Bank Form */}
-        <Card>
-          <CardContent className="pt-6">
-            {banks.length >= 5 && (
-              <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                <p className="text-sm text-yellow-800">
-                  You have reached the maximum limit of 5 banks. Please delete a bank to add a new one.
-                </p>
-              </div>
-            )}
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* First Row */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <Label className="text-base font-medium mb-2 block">Select Bank Name</Label>
-                  <Input
-                    type="text"
-                    placeholder="Enter Bank Name"
-                    value={bankName}
-                    onChange={(e) => setBankName(e.target.value)}
-                    className="h-12 text-base"
-                    required
-                    disabled={loading}
-                  />
-                </div>
-
-                <div>
-                  <Label className="text-base font-medium mb-2 block">Enter Account No</Label>
-                  <Input
-                    type="text"
-                    placeholder="Enter Account No"
-                    value={accountNo}
-                    onChange={(e) => setAccountNo(e.target.value)}
-                    className="h-12 text-base"
-                    required
-                    disabled={loading}
-                  />
-                </div>
-
-                <div>
-                  <Label className="text-base font-medium mb-2 block">Re-Enter Account No</Label>
-                  <Input
-                    type="text"
-                    placeholder="Re-Enter Account No"
-                    value={reAccountNo}
-                    onChange={(e) => setReAccountNo(e.target.value)}
-                    className="h-12 text-base"
-                    required
-                    disabled={loading}
-                  />
-                </div>
-              </div>
-
-              {/* Second Row */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <Label className="text-base font-medium mb-2 block">Enter IFSC Code</Label>
-                  <Input
-                    type="text"
-                    placeholder="Enter IFSC Code"
-                    value={ifscCode}
-                    onChange={(e) => setIfscCode(e.target.value.toUpperCase())}
-                    className="h-12 text-base"
-                    required
-                    disabled={loading}
-                  />
-                </div>
-
-                <div>
-                  <Label className="text-base font-medium mb-2 block">Branch Name</Label>
-                  <Input
-                    type="text"
-                    placeholder="Branch Name"
-                    value={branchName}
-                    onChange={(e) => setBranchName(e.target.value)}
-                    className="h-12 text-base"
-                    required
-                    disabled={loading}
-                  />
-                </div>
-
-                <div>
-                  <Label className="text-base font-medium mb-2 block">Enter Account Holder Name</Label>
-                  <Input
-                    type="text"
-                    placeholder="Enter Account Holder Name"
-                    value={accountHolderName}
-                    onChange={(e) => setAccountHolderName(e.target.value)}
-                    className="h-12 text-base"
-                    required
-                    disabled={loading}
-                  />
-                </div>
-              </div>
-
-              {/* Third Row - TPIN */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <Label className="text-base font-medium mb-2 block">TPIN</Label>
-                  <div className="relative">
-                    <Input
-                      type={showTpin ? 'text' : 'password'}
-                      placeholder="TPIN"
-                      value={tpin}
-                      onChange={(e) => setTpin(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                      className="h-12 text-base pr-12"
-                      required
-                      maxLength="6"
-                      disabled={loading}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowTpin(!showTpin)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-                    >
-                      {showTpin ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Buttons */}
-              <div className="flex gap-4">
-                <Button
-                  type="submit"
-                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-8 h-11"
-                  disabled={loading || banks.length >= 5}
-                >
-                  {loading ? 'Submitting...' : 'Submit'}
-                </Button>
-                <Button
-                  type="button"
-                  onClick={handleReset}
-                  variant="outline"
-                  className="bg-gray-400 hover:bg-gray-500 text-white px-8 h-11 border-0"
-                  disabled={loading}
-                >
-                  Reset
-                </Button>
-              </div>
-            </form>
-          </CardContent>
-        </Card>
-
-        {/* Bank List Section */}
+        {/* Bank List */}
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold">Bank List</h2>
+              <div>
+                <h2 className="text-lg font-semibold text-gray-800">Registered Banks</h2>
+                <p className="text-sm text-gray-500 mt-0.5">
+                  {banks.length} / 5 bank accounts added. To add a new bank, go to{' '}
+                  <strong>Fund Manager → IMPS Payout → Add Bank</strong>.
+                </p>
+              </div>
               <Button
                 variant="ghost"
                 size="sm"
@@ -396,7 +159,7 @@ export default function BankManagement() {
               </Button>
             </div>
 
-            {/* Note */}
+            {/* Notes */}
             <div className="mb-4 space-y-1">
               <p className="text-sm text-gray-700"><span className="font-semibold">Note:</span></p>
               <p className="text-sm text-gray-600">1. Maximum 5 banks allowed to add.</p>
@@ -406,7 +169,7 @@ export default function BankManagement() {
             {loadingBanks ? (
               <div className="flex items-center justify-center py-12">
                 <div className="text-center">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto"></div>
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto" />
                   <p className="mt-4 text-gray-600">Loading banks...</p>
                 </div>
               </div>
@@ -428,8 +191,9 @@ export default function BankManagement() {
                   <TableBody>
                     {banks.length === 0 ? (
                       <TableRow>
-                        <TableCell colSpan={8} className="text-center py-8 text-gray-500">
-                          No bank accounts found
+                        <TableCell colSpan={8} className="text-center py-10 text-gray-500">
+                          <List className="h-8 w-8 mx-auto mb-2 text-gray-300" />
+                          No bank accounts found. Add one via <strong>Fund Manager → IMPS Payout → Add Bank</strong>.
                         </TableCell>
                       </TableRow>
                     ) : (
@@ -448,9 +212,9 @@ export default function BankManagement() {
                                 onClick={() => handleToggleStatus(bank)}
                                 variant="ghost"
                                 size="sm"
-                                className={bank.is_active 
-                                  ? "text-red-600 hover:text-red-700 hover:bg-red-50" 
-                                  : "text-green-600 hover:text-green-700 hover:bg-green-50"}
+                                className={bank.is_active
+                                  ? 'text-red-600 hover:text-red-700 hover:bg-red-50'
+                                  : 'text-green-600 hover:text-green-700 hover:bg-green-50'}
                                 title={bank.is_active ? 'Deactivate' : 'Activate'}
                               >
                                 {bank.is_active ? (

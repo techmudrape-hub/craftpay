@@ -331,26 +331,8 @@ def get_pg_partners():
                 'status': 'active'
             },
             {
-                'id': 'Mudrape',
-                'name': 'Mudrape',
-                'supports': ['PAYIN', 'PAYOUT'],
-                'status': 'active'
-            },
-            {
                 'id': 'MONEYONE',
-                'name': 'MoneyOne',
-                'supports': ['PAYIN'],
-                'status': 'active'
-            },
-            {
-                'id': 'VIYONAPAY',
-                'name': 'Viyonapay',
-                'supports': ['PAYIN'],
-                'status': 'active'
-            },
-            {
-                'id': 'INSTANTPESA',
-                'name': 'InstantPesa',
+                'name': 'Orchpay',
                 'supports': ['PAYIN', 'PAYOUT'],
                 'status': 'active'
             },
@@ -367,27 +349,9 @@ def get_pg_partners():
                 'status': 'active'
             },
             {
-                'id': 'NODEPAY',
-                'name': 'NodePay',
-                'supports': ['PAYOUT'],
-                'status': 'active'
-            },
-            {
                 'id': 'RAZORPAY',
                 'name': 'Razorpay',
                 'supports': ['PAYIN'],
-                'status': 'active'
-            },
-            {
-                'id': 'PAYTM',
-                'name': 'Paytm',
-                'supports': ['PAYIN'],
-                'status': 'active'
-            },
-            {
-                'id': 'CLOCKSPAY',
-                'name': 'ClocksPay',
-                'supports': ['PAYIN', 'PAYOUT'],
                 'status': 'active'
             },
             {
@@ -397,39 +361,9 @@ def get_pg_partners():
                 'status': 'active'
             },
             {
-                'id': 'ROCKYPAYZ',
-                'name': 'RockyPayz',
-                'supports': ['PAYOUT'],
-                'status': 'active'
-            },
-            {
                 'id': 'PES',
                 'name': 'Sectorpe',
                 'supports': ['PAYIN', 'PAYOUT'],
-                'status': 'active'
-            },
-            {
-                'id': 'OQPAY',
-                'name': 'OQPay',
-                'supports': ['PAYIN', 'PAYOUT'],
-                'status': 'active'
-            },
-            {
-                'id': 'ALOPNA',
-                'name': 'Alopna',
-                'supports': ['PAYIN', 'PAYOUT'],
-                'status': 'active'
-            },
-            {
-                'id': 'NEXTPAY',
-                'name': 'Nextpay',
-                'supports': ['PAYIN', 'PAYOUT'],
-                'status': 'active'
-            },
-            {
-                'id': 'TPIPAY',
-                'name': 'Tpipay',
-                'supports': ['PAYOUT'],
                 'status': 'active'
             },
             {
@@ -441,12 +375,6 @@ def get_pg_partners():
             {
                 'id': 'PAYU_LEGALHALT',
                 'name': 'PayU Legal Halt',
-                'supports': ['PAYIN'],
-                'status': 'active'
-            },
-            {
-                'id': 'LOCALPAISA',
-                'name': 'Localpaisa',
                 'supports': ['PAYIN'],
                 'status': 'active'
             },
@@ -469,15 +397,39 @@ def get_pg_partners():
                 'status': 'active'
             },
             {
-                'id': 'AU_BANK',
-                'name': 'AU Bank',
+                'id': 'ORO',
+                'name': 'ORO',
+                'supports': ['PAYIN', 'PAYOUT'],
+                'status': 'active'
+            },
+            {
+                'id': 'HOUSEHOLD',
+                'name': 'Household',
+                'supports': ['PAYIN', 'PAYOUT'],
+                'status': 'active'
+            },
+            {
+                'id': 'KORTYAPAY',
+                'name': 'Kortyapay',
+                'supports': ['PAYOUT'],
+                'status': 'active'
+            },
+            {
+                'id': 'SABPAISA',
+                'name': 'Sabpaisa',
                 'supports': ['PAYIN'],
                 'status': 'active'
             },
             {
-                'id': 'ORO',
-                'name': 'ORO',
+                'id': 'STAR23456',
+                'name': 'Star23456',
                 'supports': ['PAYIN', 'PAYOUT'],
+                'status': 'active'
+            },
+            {
+                'id': 'SHADVALPAY',
+                'name': 'Shadvalpay',
+                'supports': ['PAYIN'],
                 'status': 'active'
             }
             # Add more PG partners here as they are integrated

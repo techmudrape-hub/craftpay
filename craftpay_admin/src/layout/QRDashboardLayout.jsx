@@ -128,7 +128,7 @@ export default function QRDashboardLayout() {
                             to={subItem.path}
                             className={`flex items-center gap-3 p-2.5 rounded-lg transition-all duration-200 group ${
                               isActive(subItem.path) 
-                                ? 'orchpay-gradient-btn text-white shadow-lg shadow-purple-500/30 scale-[1.02]' 
+                                ? 'craftpay-gradient-btn text-white shadow-lg shadow-purple-500/30 scale-[1.02]' 
                                 : 'text-gray-600 hover:bg-purple-50/70 hover:text-purple-700'
                             }`}
                           >
@@ -182,7 +182,7 @@ export default function QRDashboardLayout() {
                   <p className="text-sm font-semibold text-gray-800">QR Admin</p>
                   <p className="text-xs text-gray-500">{localStorage.getItem('qrAdminId') || 'Admin'}</p>
                 </div>
-                <div className="w-11 h-11 orchpay-gradient-btn rounded-xl flex items-center justify-center text-white font-semibold shadow-lg shadow-purple-500/30">
+                <div className="w-11 h-11 craftpay-gradient-btn rounded-xl flex items-center justify-center text-white font-semibold shadow-lg shadow-purple-500/30">
                   <QrCode size={20} />
                 </div>
               </div>

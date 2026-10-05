@@ -18,6 +18,8 @@ from viyonapay_service import viyonapay_service, viyonapay_barringer_service
 from moneyone_service import moneyone_service
 from instantpesa_service import InstantPesaService
 from maxpe_service import maxpe_service
+from shadvalpay_service import shadvalpay_service
+from star23456_service import star23456_service
 from razorpay_service import razorpay_service
 from paytm_service import paytm_service
 from clockspay_service import clockspay_service
@@ -32,6 +34,8 @@ from acceptpay_service import acceptpay_service
 from hdfc_jvi_service import hdfc_jvi_service
 from au_bank_service import au_bank_service
 from oro_service import oro_service
+from household_service import household_service
+from sabpaisa_service import sabpaisa_service
 from database import get_db_connection
 from utils import decrypt_aes, encrypt_aes, validate_api_credentials
 import json
@@ -200,6 +204,12 @@ def create_payin_order():
                 elif pg_partner == 'MAXPE':
                     # Use Maxpe for payin
                     result = maxpe_service.create_payin_order(current_merchant, order_data)
+                elif pg_partner == 'STAR23456':
+                    # Use Star23456 for payin
+                    result = star23456_service.create_payin_order(current_merchant, order_data)
+                elif pg_partner == 'SHADVALPAY':
+                    # Use Shadvalpay for payin
+                    result = shadvalpay_service.create_payin_order(current_merchant, order_data)
                 elif pg_partner == 'RAZORPAY':
                     # Use Razorpay for payin
                     result = razorpay_service.create_payin_order(current_merchant, order_data)
@@ -244,6 +254,12 @@ def create_payin_order():
                 elif pg_partner == 'ORO':
                     # Use ORO for payin
                     result = oro_service.create_payin_order(current_merchant, order_data)
+                elif pg_partner == 'HOUSEHOLD':
+                    # Use Household for payin
+                    result = household_service.create_payin_order(current_merchant, order_data)
+                elif pg_partner == 'SABPAISA':
+                    # Use Sabpaisa for payin
+                    result = sabpaisa_service.create_payin_order(current_merchant, order_data)
                 else:
                     # Use PayU for payin (default)
                     result = payu_service.create_payin_order(current_merchant, order_data)

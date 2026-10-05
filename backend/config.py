@@ -125,14 +125,25 @@ class Config:
     CINORIGHT_USER_ID = os.getenv('CINORIGHT_USER_ID', '')
     
     # Maxpe Configuration
-    MAXPE_BASE_URL = os.getenv('MAXPE_BASE_URL', 'https://merchant.maxpe.tech')
+    MAXPE_BASE_URL = os.getenv('MAXPE_BASE_URL', 'https://member.maxpe.tech')
     MAXPE_API_KEY = os.getenv('MAXPE_API_KEY', 'LJvMg0aYcOfwXlWFjy')
     MAXPE_API_SECRET = os.getenv('MAXPE_API_SECRET', '7PcBEkfgJUsVmqQAeXaCjGlhHMOnwD5rRIzvS6WY89tpF')
+    
+    # Shadvalpay Configuration
+    SHADVALPAY_BASE_URL = os.getenv('SHADVALPAY_BASE_URL', 'https://partners.shadvalpay.co.in/api')
+    SHADVALPAY_MERCHANT_ID = os.getenv('SHADVALPAY_MERCHANT_ID', '')
+    SHADVALPAY_KEY = os.getenv('SHADVALPAY_KEY', '')
     
     # Nextpay Configuration
     NEXTPAY_BASE_URL = os.getenv('NEXTPAY_BASE_URL', 'https://nextpey.in')
     NEXTPAY_CLIENT_ID = os.getenv('NEXTPAY_CLIENT_ID', '')
     NEXTPAY_API_SECRET = os.getenv('NEXTPAY_API_SECRET', '')
+    
+    # Star23456 Configuration
+    STAR23456_BASE_URL = os.getenv('STAR23456_BASE_URL', 'https://api.star23456.com/api')
+    STAR23456_MERCHANT_ID = os.getenv('STAR23456_MERCHANT_ID', '')
+    STAR23456_API_KEY = os.getenv('STAR23456_API_KEY', '')
+    STAR23456_MERCHANT_KEY = os.getenv('STAR23456_MERCHANT_KEY', '')
 
     
     # NodePay Configuration (uses same integration as MaxPe but different credentials)
@@ -208,6 +219,29 @@ class Config:
     ORO_BASE_URL = os.getenv('ORO_BASE_URL', 'http://oroitsolution.info/api')
     ORO_CLIENT_ID = os.getenv('ORO_CLIENT_ID', '')
     ORO_SECRET_ID = os.getenv('ORO_SECRET_ID', '')
+
+    # Household Configuration
+    HOUSEHOLD_BASE_URL = os.getenv('HOUSEHOLD_BASE_URL', 'http://householditsolution.info/api')
+    HOUSEHOLD_PAYOUT_BASE_URL = os.getenv('HOUSEHOLD_PAYOUT_BASE_URL', 'https://product.housholdbajar.com/api')
+    HOUSEHOLD_CLIENT_ID = os.getenv('HOUSEHOLD_CLIENT_ID', '')
+    HOUSEHOLD_SECRET_ID = os.getenv('HOUSEHOLD_SECRET_ID', '')
+
+    # Kortyapay Configuration
+    KORTYAPAY_BASE_URL = os.getenv('KORTYAPAY_BASE_URL', 'https://cms.kortyapayultra.com/api')
+    KORTYAPAY_EMAIL = os.getenv('KORTYAPAY_EMAIL', '')
+    KORTYAPAY_PASSWORD = os.getenv('KORTYAPAY_PASSWORD', '')
+    KORTYAPAY_TOKEN = os.getenv('KORTYAPAY_TOKEN', os.getenv('KORTYAPAY_API_KEY', ''))
+    KORTYAPAY_API_KEY = KORTYAPAY_TOKEN
+    KORTYAPAY_CLIENT_ID = os.getenv('KORTYAPAY_CLIENT_ID', '')
+    KORTYAPAY_SECRET_KEY = os.getenv('KORTYAPAY_SECRET_KEY', '')
+
+    # Sabpaisa Configuration
+    SABPAISA_BASE_URL = os.getenv('SABPAISA_BASE_URL', 'https://merchant-api.sabpaisa.in')
+    SABPAISA_CLIENT_CODE = os.getenv('SABPAISA_CLIENT_CODE', '')
+    SABPAISA_API_KEY = os.getenv('SABPAISA_API_KEY', '')
+    SABPAISA_SECRET_KEY = os.getenv('SABPAISA_SECRET_KEY', '')
+    SABPAISA_WEBHOOK_SECRET = os.getenv('SABPAISA_WEBHOOK_SECRET', '')
+
 
     # SMTP Email Configuration
     SMTP_HOST = os.getenv('SMTP_HOST', 'smtp.gmail.com')

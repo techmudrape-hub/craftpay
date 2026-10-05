@@ -61,6 +61,7 @@ from instantpesa_callback_routes import instantpesa_callback_bp
 from instantpesa_payout_callback_routes import instantpesa_payout_callback_bp
 from cinoright_callback_routes import cinoright_callback_bp
 from maxpe_callback_routes import maxpe_callback_bp
+from shadvalpay_callback_routes import shadvalpay_callback_bp
 from maxpe_checkout_routes import maxpe_checkout_bp
 from maxpe_payout_callback_routes import maxpe_payout_callback_bp
 from clockspay_callback_routes import clockspay_callback_bp
@@ -86,6 +87,12 @@ from titanexam_callback_routes import titanexam_callback_bp
 from acceptpay_callback_routes import acceptpay_callback_bp, cashfree_webhook_bp, acceptpay_webhook
 from oro_callback_routes import oro_callback_bp
 from oro_payout_callback_routes import oro_payout_callback_bp
+from household_callback_routes import household_callback_bp
+from household_payout_callback_routes import household_payout_callback_bp
+from kortyapay_payout_callback_routes import kortyapay_payout_callback_bp
+from sabpaisa_callback_routes import sabpaisa_callback_bp
+from star23456_callback_routes import star23456_callback_bp
+from star23456_payout_callback_routes import star23456_payout_callback_bp
 from service_routing_routes import routing_bp
 from payout_routes import payout_bp
 from payu_webhook_routes import payu_webhook_bp
@@ -122,6 +129,7 @@ app.register_blueprint(instantpesa_callback_bp)
 app.register_blueprint(instantpesa_payout_callback_bp)
 app.register_blueprint(cinoright_callback_bp)
 app.register_blueprint(maxpe_callback_bp)
+app.register_blueprint(shadvalpay_callback_bp)
 app.register_blueprint(maxpe_checkout_bp)
 app.register_blueprint(maxpe_payout_callback_bp)
 app.register_blueprint(clockspay_callback_bp)
@@ -144,10 +152,16 @@ app.register_blueprint(makemypayment_payout_callback_bp)
 app.register_blueprint(payu_legalhalt_callback_bp)
 app.register_blueprint(localpaisa_callback_bp)
 app.register_blueprint(titanexam_callback_bp)
+app.register_blueprint(star23456_callback_bp)
+app.register_blueprint(star23456_payout_callback_bp)
 app.register_blueprint(acceptpay_callback_bp)
+app.register_blueprint(sabpaisa_callback_bp)
 app.register_blueprint(cashfree_webhook_bp)
 app.register_blueprint(oro_callback_bp)
 app.register_blueprint(oro_payout_callback_bp)
+app.register_blueprint(household_callback_bp)
+app.register_blueprint(household_payout_callback_bp)
+app.register_blueprint(kortyapay_payout_callback_bp)
 app.register_blueprint(routing_bp)
 app.register_blueprint(payout_bp)
 app.register_blueprint(payu_webhook_bp)

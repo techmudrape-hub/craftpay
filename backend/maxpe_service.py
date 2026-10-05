@@ -222,9 +222,12 @@ class MaxpeService:
                 random_string = ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
                 payer_vpa = order_data.get('payer_vpa') or f"usr{random_string}@okaxis"
                 
+                # Amount must be a whole number in rupees (MaxPe requirement)
+                amount_str = str(int(amount))
+                
                 # Prepare payload for signature
                 data_to_sign = {
-                    'amount': str(amount),
+                    'amount': amount_str,
                     'email': customer_email.strip(),
                     'mobile': customer_mobile.strip(),
                     'name': customer_name.strip(),
@@ -247,17 +250,18 @@ class MaxpeService:
                 print(f"  Signature: {signature[:20]}...")
                 
                 # Prepare request payload (without nonce and timestamp - they go in headers)
+                # amount_str must exactly match what was used in the signature
                 payload = {
                     'name': customer_name.strip(),
                     'mobile': customer_mobile.strip(),
                     'email': customer_email.strip(),
-                    'amount': str(amount),
+                    'amount': amount_str,
                     'payer_vpa': payer_vpa,
                     'merchant_order_id': merchant_order_id.strip()
                 }
                 
                 # Create payment order
-                url = f"{self.base_url}/api/prod/payin/create-payment"
+                url = f"{self.base_url}/api/prod/payin/v1/create-payment"
                 
                 print(f"[MaxPe PayIn] Sending request to: {url}")
                 api_start = time.time()
@@ -449,7 +453,7 @@ class MaxpeService:
         try:
             print(f"Checking Maxpe payment status - merchant_order_id: {merchant_order_id}")
             
-            url = f"{self.base_url}/api/prod/payin1/status"
+            url = f"{self.base_url}/api/prod/payin/v1/status"
             
             # Status check uses form data and only requires X-API-KEY header
             headers = {

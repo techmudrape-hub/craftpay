@@ -439,7 +439,7 @@ export default function DashboardLayout() {
                               isDisabled
                                 ? 'opacity-40 blur-[0.5px] cursor-not-allowed pointer-events-none'
                                 : isActive(subItem.path) 
-                                  ? 'orchpay-gradient-btn text-white shadow-lg shadow-purple-500/30 scale-[1.02]' 
+                                  ? 'craftpay-gradient-btn text-white shadow-lg shadow-purple-500/30 scale-[1.02]' 
                                   : 'text-gray-600 hover:bg-purple-50/70 hover:text-purple-700'
                             }`}
                             {...(isDisabled && { title: 'Coming Soon' })}
@@ -457,7 +457,7 @@ export default function DashboardLayout() {
                   to={item.path}
                   className={`flex items-center gap-3 p-3 rounded-xl transition-all duration-200 group ${
                     isActive(item.path) 
-                      ? 'orchpay-gradient-btn text-white shadow-lg shadow-purple-500/30 scale-[1.02]' 
+                      ? 'craftpay-gradient-btn text-white shadow-lg shadow-purple-500/30 scale-[1.02]' 
                       : 'text-gray-700 hover:bg-purple-50/70 hover:text-purple-700'
                   } ${!sidebarOpen && 'justify-center'}`}
                   title={!sidebarOpen ? item.title : ''}
@@ -507,7 +507,7 @@ export default function DashboardLayout() {
                 >
                   <Bell size={22} />
                   {notificationCount > 0 && (
-                    <span className="absolute top-0.5 right-0.5 w-5 h-5 orchpay-gradient-btn text-white text-xs rounded-full flex items-center justify-center font-semibold animate-pulse">
+                    <span className="absolute top-0.5 right-0.5 w-5 h-5 craftpay-gradient-btn text-white text-xs rounded-full flex items-center justify-center font-semibold animate-pulse">
                       {notificationCount > 9 ? '9+' : notificationCount}
                     </span>
                   )}
@@ -516,7 +516,7 @@ export default function DashboardLayout() {
                 {/* Notification Dropdown */}
                 {showNotifications && (
                   <div className="absolute right-0 mt-2 w-96 glass-effect rounded-2xl shadow-2xl border border-purple-100/50 z-50 max-h-96 overflow-hidden">
-                    <div className="p-4 border-b border-purple-100/50 orchpay-gradient-btn text-white">
+                    <div className="p-4 border-b border-purple-100/50 craftpay-gradient-btn text-white">
                       <h3 className="font-semibold">Pending Fund Requests</h3>
                       <p className="text-xs text-white/90 mt-1">{notificationCount} pending request{notificationCount !== 1 ? 's' : ''}</p>
                     </div>
@@ -572,7 +572,7 @@ export default function DashboardLayout() {
                   <p className="text-sm font-semibold text-gray-800">Admin User</p>
                   <p className="text-xs text-gray-500">{adminAPI.getAdminId() || 'admin@orchpay.com'}</p>
                 </div>
-                <div className="w-11 h-11 orchpay-gradient-btn rounded-xl flex items-center justify-center text-white font-semibold shadow-lg shadow-purple-500/30">
+                <div className="w-11 h-11 craftpay-gradient-btn rounded-xl flex items-center justify-center text-white font-semibold shadow-lg shadow-purple-500/30">
                   <User size={20} />
                 </div>
               </div>
